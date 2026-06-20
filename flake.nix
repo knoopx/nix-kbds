@@ -19,6 +19,47 @@
         overlays = [ qmix.overlays.default ];
       };
 
+      # Derivation: vitaly - Vial CLI tool for keyboard configuration
+      # https://github.com/bskaplou/vitaly
+      vitaly = pkgs.rustPlatform.buildRustPackage {
+        pname = "vitaly";
+        version = "0.1.32";
+
+        src = pkgs.fetchFromGitHub {
+          owner = "bskaplou";
+          repo = "vitaly";
+          rev = "refs/tags/v0.1.32";
+          hash = "sha256-u1OmH2AeskcjNB1ac6iSBaA0Xyea+tB8f5F/LCzafj4=";
+        };
+
+        cargoHash = "sha256-HBJFOi3KrjIepGaPwtv/39sQotvQPae9y2rdPJ/uQ8k=";
+
+        patches = [
+          ./scripts/vitaly-borders.patch
+        ];
+
+        postPatch = ''
+          sed -i 's/"⌧"/" "/g' src/keycodes/v5/code_to_name.rs src/keycodes/v6/code_to_name.rs
+        '';
+
+        nativeBuildInputs = [
+          pkgs.pkg-config
+        ];
+
+        buildInputs = [
+          pkgs.systemd
+          pkgs.libusb1
+        ];
+
+        meta = with pkgs.lib;
+          {
+            description = "VIA/Vial HID USB cli tool for keyboard configuration";
+            homepage = "https://github.com/bskaplou/vitaly";
+            license = licenses.mit;
+            platforms = platforms.linux;
+          };
+      };
+
       vialQmkFirmware = pkgs.fetchQmkFirmware {
         url = "https://github.com/vial-kb/vial-qmk.git";
         origin = "https://github.com/vial-kb/vial-qmk.git";
@@ -28,6 +69,8 @@
     in
     {
       packages.${system} = {
+        vitaly = vitaly;
+
         crkbd-choc-v2 = pkgs.buildQmkFirmware {
           keyboard = "crkbd";
           keymap = "choc-v2";

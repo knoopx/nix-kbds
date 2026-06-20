@@ -1,0 +1,40 @@
+--- a/src/keymap.rs
++++ b/src/keymap.rs
+@@ -351,28 +351,28 @@ pub fn render_and_dump(buttons: &Vec<Button>, labels: Option<HashMap<(u8, u8), S
+                 (b.y + b.h - 1.0).round() as usize,
+             );
+             if !b.encoder {
+-                buff.put(lu.0, lu.1, '╔', &b.color);
++                buff.put(lu.0, lu.1, '┌', &b.color);
+                 for x in (lu.0 + 1)..ru.0 {
+-                    buff.put(x, lu.1, '═', &b.color);
++                    buff.put(x, lu.1, '─', &b.color);
+                 }
+-                buff.put(ru.0, ru.1, '╗', &b.color);
++                buff.put(ru.0, ru.1, '┐', &b.color);
+                 for y in (lu.1 + 1)..lb.1 {
+-                    buff.put(lu.0, y, '║', &b.color);
++                    buff.put(lu.0, y, '│', &b.color);
+                 }
+                 for y in (ru.1 + 1)..rb.1 {
+-                    buff.put(ru.0, y, '║', &b.color);
++                    buff.put(ru.0, y, '│', &b.color);
+                 }
+-                buff.put(lb.0, lb.1, '╚', &b.color);
++                buff.put(lb.0, lb.1, '└', &b.color);
+                 for x in (lb.0 + 1)..rb.0 {
+-                    buff.put(x, lb.1, '═', &b.color);
++                    buff.put(x, lb.1, '─', &b.color);
+                 }
+-                buff.put(rb.0, rb.1, '╝', &b.color);
++                buff.put(rb.0, rb.1, '┘', &b.color);
+             } else {
+                 buff.put(lu.0, lu.1, '╭', &b.color);
+                 for x in (lu.0 + 1)..ru.0 {
+                     buff.put(x, lu.1, '─', &b.color);
+                 }
+-                buff.put(ru.0, ru.1, '╮', &b.color);
++                buff.put(ru.0, ru.1, '╮', &b.color);
+                 for y in (lu.1 + 1)..lb.1 {
+                     buff.put(lu.0, y, '│', &b.color);
+                 }
