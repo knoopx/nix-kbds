@@ -92,7 +92,7 @@ nix run nixpkgs#qmk -- flash result/share/qmk/firmware/right/crkbd_rev1_classic-
 
 ## Corne Keymap Layouts
 
-**Layer 0 — QWERTY**
+**QWERTY Layer**
 
 ```
               ┌──┐                              ┌──┐
@@ -116,7 +116,7 @@ nix run nixpkgs#qmk -- flash result/share/qmk/firmware/right/crkbd_rev1_classic-
                            └──┘    └──┘
 ```
 
-**Layer 1 — NUMBER**
+**Navigation Layer**
 
 ```
               ┌──┐                              ┌──┐
@@ -141,7 +141,7 @@ nix run nixpkgs#qmk -- flash result/share/qmk/firmware/right/crkbd_rev1_classic-
 *1 - KC_PRINT_SCREEN
 ```
 
-**Layer 2 — SYMBOL**
+**Symbol Layer**
 
 ```
               ┌──┐                              ┌──┐
@@ -167,7 +167,7 @@ nix run nixpkgs#qmk -- flash result/share/qmk/firmware/right/crkbd_rev1_classic-
 *2 - L⇧,,
 ```
 
-**Layer 3 — F-keys / Numeric**
+**F-keys / Number Layer**
 
 ```
               ┌──┐                              ┌──┐
@@ -191,7 +191,7 @@ nix run nixpkgs#qmk -- flash result/share/qmk/firmware/right/crkbd_rev1_classic-
                            └──┘    └──┘
 ```
 
-**Layer 4 — Alt-F / Alt-Numbers**
+**Alt-F / Alt-Number Layer**
 
 ```
               ┌──┐                              ┌──┐
