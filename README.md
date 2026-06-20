@@ -34,8 +34,6 @@ This project fetches **vial-qmk** (QMK fork with [Vial](https://getvial.io/) sup
   - Split sync: layer state, LED state, mods, transaction mirror
   - USB auto-detect master/slave
 
-Layer diagrams: see [Corne Keymap Layouts](#corne-keymap-layouts) below.
-
 **Build**:
 
 ```bash
@@ -62,13 +60,11 @@ nix run nixpkgs#qmk -- flash result/share/qmk/firmware/right/*.uf2 -bl uf2-split
 - **Firmware**: vial-qmk (Vial-compatible QMK fork)
 - **Layout**: `LAYOUT_split_3x6_3` — 36 main keys + 3 thumb keys per half
 - **Features**:
-  - Vial combos (4 entries), tap dance (4 entries), key overrides (4 entries)
+  - Vial combos (4 entries), tap dance (10 entries), key overrides (4 entries)
   - 6 dynamic macros
   - NKRO
   - Split sync (layer/LED/mods)
   - USB auto-detect master/slave
-
-Layer diagrams: see [Corne Keymap Layouts](#corne-keymap-layouts) below.
 
 **Build**:
 
@@ -92,7 +88,25 @@ nix run nixpkgs#qmk -- flash result/share/qmk/firmware/right/crkbd_rev1_classic-
 
 ## Corne Keymap Layouts
 
-**QWERTY Layer**
+> These keymaps are designed for the **EurKey** layout — a multilingual layout based on QWERTY that provides Western European accented characters (French, Spanish, German, Portuguese, etc.) via **Alt Gr** combos, while keeping the familiar QWERTY base for coding and ASCII symbols.
+
+### TapDance
+
+TapDance keys produce different actions based on tap vs. hold timing. All slots use `TD(...)` in the keymap. These tap-dance keys replicate **EurKey** accented characters that are normally accessed via **Alt Gr** on the OS level.
+
+| Slot | Tap | Hold/Double | Term | EurKey Char | Description |
+|---|---|---|---|---|---|
+| 0 | `KC_A` | `RALT(KC_X)` | 200ms | á | Tap: `A` · Hold: `AltGr+X` → á |
+| 1 | `KC_E` | `RALT(KC_G)` | 200ms | é | Tap: `E` · Hold: `AltGr+G` → é |
+| 2 | `KC_I` | `RALT(KC_B)` | 200ms | í | Tap: `I` · Hold: `AltGr+B` → í |
+| 3 | `KC_O` | `RALT(KC_DOT)` | 200ms | ó | Tap: `O` · Hold: `AltGr+.` → ó |
+| 4 | `KC_U` | `RALT(KC_J)` | 200ms | ú | Tap: `U` · Hold: `AltGr+J` → ú |
+| 5 | `KC_N` | `RALT(KC_N)` | 200ms | ñ | Tap: `N` · Hold: `AltGr+N` → ñ |
+| 6 | `KC_C` | `RALT(KC_C)` | 200ms | ç | Tap: `C` · Hold: `AltGr+C` → ç |
+| 7 | `KC_LEFT_GUI` | `KC_LEFT_ALT` | 350ms | — | Tap: `GUI` (Win) · Hold: `AltGr` |
+| 8 | `KC_LEFT_SHIFT` | double tap → `KC_CAPS_LOCK` | 180ms | — | Tap: `LShift` · Double: `CapsLock` |
+
+**QWERTY Layer (0)**
 
 ```
               ┌──┐                              ┌──┐
@@ -116,7 +130,9 @@ nix run nixpkgs#qmk -- flash result/share/qmk/firmware/right/crkbd_rev1_classic-
                            └──┘    └──┘
 ```
 
-**Navigation Layer**
+**Navigation Layer (1)**
+
+Layer 1 provides navigation keys (arrows, page up/down, home/end) and macros on the left, plus media/print keys on the right.
 
 ```
               ┌──┐                              ┌──┐
@@ -141,7 +157,13 @@ nix run nixpkgs#qmk -- flash result/share/qmk/firmware/right/crkbd_rev1_classic-
 *1 - KC_PRINT_SCREEN
 ```
 
-**Symbol Layer**
+| Symbol | Keycode | Description |
+|---|---|---|
+| MO | `MO(4)` / `MO(5)` | Momentary layer switch to layer 4 or 5 |
+
+**Symbol Layer (2)**
+
+Layer 2 provides symbols via `LSHIFT` (left hand) and EurKey Alt Gr combos (right hand), with navigation on thumbs.
 
 ```
               ┌──┐                              ┌──┐
@@ -167,7 +189,16 @@ nix run nixpkgs#qmk -- flash result/share/qmk/firmware/right/crkbd_rev1_classic-
 *2 - L⇧,,
 ```
 
-**F-keys / Number Layer**
+| Symbol | Keycode | Description |
+|---|---|---|
+| L⇧ | `KC_LSFT` | Left Shift (for symbol access) |
+| MO | `MO(3)` / `MO(5)` | Momentary layer switch to layer 3 or 5 |
+| *1 | `RALT(KC_5)` | AltGr + 5 → € |
+| *2 | `KC_LSFT(KC_COMMA)` | Left Shift + comma → `<` |
+
+**F-keys / Number Layer (3)**
+
+Layer 3 provides F1-F12 on the left hand and a numpad-like layout on the right.
 
 ```
               ┌──┐                              ┌──┐
@@ -191,7 +222,9 @@ nix run nixpkgs#qmk -- flash result/share/qmk/firmware/right/crkbd_rev1_classic-
                            └──┘    └──┘
 ```
 
-**Alt-F / Alt-Number Layer**
+**Alt-F / Extended Symbols Layer (4)**
+
+Layer 4 maps to `Alt+F` (left hand) and `Alt+Number` (right hand) for media/number shortcuts.
 
 ```
               ┌──┐                              ┌──┐
@@ -213,31 +246,37 @@ nix run nixpkgs#qmk -- flash result/share/qmk/firmware/right/crkbd_rev1_classic-
                 └──┘ └──┘  │  │    │  │  └──┘ └──┘
                            │  │    │  │
                            └──┘    └──┘
-*1 - LALT(KC_F3)
-*2 - RALT(KC_3)
-*3 - LALT(KC_F2)
-*4 - LALT(KC_F4)
-*5 - RALT(KC_2)
-*6 - RALT(KC_4)
-*7 - LALT(KC_F5)
-*8 - RALT(KC_1)
-*9 - LALT(KC_F1)
-*10 - RALT(KC_5)
-*11 - LALT(KC_F8)
-*12 - RALT(KC_8)
-*13 - LALT(KC_F7)
-*14 - LALT(KC_F9)
-*15 - RALT(KC_7)
-*16 - RALT(KC_9)
-*17 - LALT(KC_F10)
-*18 - RALT(KC_6)
-*19 - LALT(KC_F6)
-*20 - RALT(KC_0)
-*21 - LALT(KC_F12)
-*22 - LALT(KC_F11)
 ```
 
-**Layer 5 — Media / System**
+| Ref | Keycode | Description |
+|---|---|---|
+| *1 | `LALT(KC_F3)` | AltGr + F3 |
+| *2 | `RALT(KC_3)` | AltGr + 3 |
+| *3 | `LALT(KC_F2)` | AltGr + F2 |
+| *4 | `LALT(KC_F4)` | AltGr + F4 |
+| *5 | `RALT(KC_2)` | AltGr + 2 |
+| *6 | `RALT(KC_4)` | AltGr + 4 |
+| *7 | `LALT(KC_F5)` | AltGr + F5 |
+| *8 | `RALT(KC_1)` | AltGr + 1 |
+| *9 | `LALT(KC_F1)` | AltGr + F1 |
+| *10 | `RALT(KC_5)` | AltGr + 5 |
+| *11 | `LALT(KC_F8)` | AltGr + F8 |
+| *12 | `RALT(KC_8)` | AltGr + 8 |
+| *13 | `LALT(KC_F7)` | AltGr + F7 |
+| *14 | `LALT(KC_F9)` | AltGr + F9 |
+| *15 | `RALT(KC_7)` | AltGr + 7 |
+| *16 | `RALT(KC_9)` | AltGr + 9 |
+| *17 | `LALT(KC_F10)` | AltGr + F10 |
+| *18 | `RALT(KC_6)` | AltGr + 6 |
+| *19 | `LALT(KC_F6)` | AltGr + F6 |
+| *20 | `RALT(KC_0)` | AltGr + 0 |
+| *21 | `LALT(KC_F12)` | AltGr + F12 |
+| *22 | `LALT(KC_F11)` | AltGr + F11 |
+```
+
+**Media / System (5)**
+
+Layer 5 provides media controls (volume, playback) on the left hand and system/magic keys on the right.
 
 ```
               ┌──┐                              ┌──┐
@@ -263,11 +302,19 @@ nix run nixpkgs#qmk -- flash result/share/qmk/firmware/right/crkbd_rev1_classic-
 *2 - QK_MAGIC_EE_HANDS_LEFT
 *3 - QK_BOOTLOADER
 ```
+
+| Symbol | Keycode | Description |
+|---|---|---|
+| V+ | `KC_VOLUME_UP` | Volume up |
+| V- | `KC_VOLUME_DOWN` | Volume down |
+| << | `KC_PREVIOUS` | Previous track |
+| >> | `KC_NEXT` | Next track |
+| ⏯ | `KC_PLAY_PAUSE` | Play/pause toggle |
+| Mut | `KC_MUTE` | Mute audio |
+| *1 | `QK_MAGIC_EE_HANDS_RIGHT` | Magic: sync EEPROM to right hand |
+| *2 | `QK_MAGIC_EE_HANDS_LEFT` | Magic: sync EEPROM to left hand |
+| *3 | `QK_BOOTLOADER` | Reboot into bootloader (for flashing) |
 ---
-
-## Requirements
-
-- [Nix](https://nixos.org/download.html) with flakes enabled
 
 ## Usage
 
@@ -306,40 +353,7 @@ nix run nixpkgs#qmk -- flash result/share/qmk/firmware/right/*.uf2 -bl uf2-split
 Render the keyboard layout from a connected keyboard:
 
 ```bash
-nix run path:.#vitaly -- layers
-```
-
-### Development shell
-
-```bash
-nix develop
-```
-
-Enters a shell with `qmk` CLI and `git` available.
-
-### Format
-
-```bash
-nix fmt
-```
-
-## Project structure
-
-```
-flake.nix                          # Flake definition, QMix input, packages
-keyboards/
-  crkbd/
-    keymaps/
-      choc-v2/                      # Corne Chocolate v2 keymap
-        config.h                    # Vial UID, layer/macro counts, RGB settings
-        keymap.c                    # Layer definitions and key bindings
-        rules.mk                    # Feature toggles (RGB Matrix, Vial, Unicode, etc.)
-        vial.json                   # Vial layout definition (matrix, key positions)
-      classic-v3/                   # Corne Classic v3 keymap
-        config.h                    # Vial UID, layer/macro counts
-        keymap.c                    # Layer definitions and key bindings
-        rules.mk                    # Feature toggles (Vial, tap dance, etc.)
-        vial.json                   # Vial layout definition
+nix run path:.#vitaly -- layers -n <layer-number>
 ```
 
 ## How it works
