@@ -35,7 +35,7 @@
         cargoHash = "sha256-HBJFOi3KrjIepGaPwtv/39sQotvQPae9y2rdPJ/uQ8k=";
 
         patches = [
-          ./scripts/vitaly-borders.patch
+          ./vitaly-borders.patch
         ];
 
         postPatch = ''
