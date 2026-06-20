@@ -272,7 +272,6 @@ Layer 4 maps to `Alt+F` (left hand) and `Alt+Number` (right hand) for media/numb
 | *20 | `RALT(KC_0)` | AltGr + 0 |
 | *21 | `LALT(KC_F12)` | AltGr + F12 |
 | *22 | `LALT(KC_F11)` | AltGr + F11 |
-```
 
 **Media / System (5)**
 
