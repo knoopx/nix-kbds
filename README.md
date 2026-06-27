@@ -15,6 +15,8 @@ This project fetches **vial-qmk** (QMK fork with [Vial](https://getvial.io/) sup
 
 ### Corne Chocolate v2 (`crkbd-choc-v2`)
 
+<img width="4032" height="3024" alt="bc6d6406-ded2-490e-b189-96cdd792cb4a" src="https://github.com/user-attachments/assets/3fdc4046-2e48-45dd-a0cc-0202ba6f3ba5" />
+
 [Corne Keyboard](https://github.com/foostan/crkbd) — split 3x6 + 3 thumb layout based on [Helix](https://github.com/MakotoKurauchi/helix), for **Kailh Choc v1/v2** switches.
 
 - **MCU**: RP2040 ProMicro (`CONVERT_TO=promicro_rp2040`)
@@ -53,6 +55,8 @@ nix run nixpkgs#qmk -- flash result/share/qmk/firmware/right/*.uf2 -bl uf2-split
 ```
 
 ### Corne Classic v3 (`crkbd-classic-v3`)
+
+<img width="4032" height="3024" alt="0d8aa287-056a-4e8a-afaf-71d9c4e94734" src="https://github.com/user-attachments/assets/c88e8faa-784e-453a-872a-fd4dfdf5b759" />
 
 [Corne Keyboard](https://github.com/foostan/crkbd) — same split 3x6 + 3 thumb layout, for **Cherry MX** compatible switches.
 
